@@ -1,80 +1,82 @@
+import CeremonyDataType from "@/types/ceremonyData.type";
 import {
-    RiCalendarEventFill,
-    RiChromeFill,
-    RiFirefoxFill,
-    RiMap2Fill,
-    RiOperaFill,
-    RiSafariFill,
-    RiUserHeartFill,
+  RiCalendarEventFill,
+  RiMap2Fill,
+  RiSafariFill,
+  RiUserHeartFill,
 } from "@remixicon/react";
+import Image from "next/image";
 import { HTMLAttributes } from "react";
 
-const defaultContent = [
-    " the address line",
-    " 2025 March 19",
-    " the hosts name",
-];
+/* 
 
-type DescBoxProps = { textContent?: string[] } & HTMLAttributes<HTMLDivElement>;
+ceremonyDateString is an string like 2025-03-25
+ceremonyHallName is an string like Master Complex
+ceremonyHost is an string like Mr. John
+cta_link is an Array like ["https://...", "https://...", ...]
+cta_logo is an Array like ["https://...", "https://...", ...]
+
+*/
+
+type DescBoxProps = {} & HTMLAttributes<HTMLDivElement> &
+  Omit<CeremonyDataType, "names">;
 
 const DescBox = ({
-    children,
-    className,
-    textContent = defaultContent,
-    ...props
+  children,
+  className,
+  ceremonyDateString,
+  ceremonyHallName,
+  ceremonyHost,
+  cta_link,
+  cta_logo,
+  ...props
 }: DescBoxProps) => {
-    return (
-        <div
-            className={`${className} p-3 m-10 mt-0 bg-white/50 rounded-lg shadow-inner overflow-clip`}
-            {...props}
-        >
-            <ul className="text-lg h-2/3 *:my-4 place-content-center">
-                <li>
-                    <RiMap2Fill className="inline" /> {textContent[0]}
-                </li>
-                <li>
-                    <RiCalendarEventFill className="inline" /> {textContent[1]}
-                </li>
-                <li>
-                    <RiUserHeartFill className="inline" /> {textContent[2]}
-                </li>
-            </ul>
-            <div className="flex justify-between flex-wrap h-1/3 items-center *:text-center place-items-center">
-                <div className="w-10 aspect-square bg-blue-50/50 rounded-full flex justify-center items-center">
-                    <a
-                        href="http://"
-                        className="hover:text-blue-400 focus:text-blue-400 visited:text-black transition-colors"
-                    >
-                        <RiSafariFill />
-                    </a>
-                </div>
-                <div className="w-10 aspect-square bg-blue-50/50 rounded-full flex justify-center items-center">
-                    <a
-                        href="http://"
-                        className="hover:text-blue-400 focus:text-blue-400 visited:text-black transition-colors"
-                    >
-                        <RiChromeFill />
-                    </a>
-                </div>
-                <div className="w-10 aspect-square bg-blue-50/50 rounded-full flex justify-center items-center">
-                    <a
-                        href="http://"
-                        className="hover:text-blue-400 focus:text-blue-400 visited:text-black transition-colors"
-                    >
-                        <RiFirefoxFill />
-                    </a>
-                </div>
-                <div className="w-10 aspect-square bg-blue-50/50 rounded-full flex justify-center items-center">
-                    <a
-                        href="http://"
-                        className="hover:text-blue-400 focus:text-blue-400 visited:text-black transition-colors"
-                    >
-                        <RiOperaFill />
-                    </a>
-                </div>
-            </div>
-        </div>
-    );
+  return (
+    <div
+      className={`${className} p-3 m-10 mt-0 bg-white/50 rounded-lg shadow-inner overflow-clip`}
+      {...props}
+    >
+      <ul className="text-lg h-2/3 *:my-4 place-content-center">
+        <li>
+          {/* Hall Name */}
+          <RiMap2Fill className="inline" /> {ceremonyHallName}
+        </li>
+        <li>
+          {/* Date */}
+          <RiCalendarEventFill className="inline" /> {ceremonyDateString}
+        </li>
+        <li>
+          {/* Host Name */}
+          <RiUserHeartFill className="inline" /> {ceremonyHost}
+        </li>
+      </ul>
+      <div className="flex justify-between flex-wrap h-1/3 items-center *:text-center place-items-center">
+        {cta_link.map((v, i) => (
+          <div
+            key={`cta #-${i}`}
+            className="w-10 aspect-square bg-blue-50/50 rounded-full flex justify-center items-center"
+          >
+            <a
+              href={v || "http://"}
+              className="hover:text-blue-400 focus:text-blue-400 visited:text-black transition-colors relative overflow-clip"
+            >
+              {cta_logo[i] ? (
+                <Image
+                  src={cta_logo[i]}
+                  alt=""
+                  width={64}
+                  height={64}
+                  className="rounded-full aspect-square"
+                />
+              ) : (
+                <RiSafariFill />
+              )}
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default DescBox;
