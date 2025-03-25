@@ -33,21 +33,24 @@ const DescBox = ({
 }: DescBoxProps) => {
   return (
     <div
-      className={`${className} p-3 m-10 mt-0 bg-white/50 rounded-lg shadow-inner overflow-clip`}
+      className={`${className} w-2/3 p-3 m-10 mt-0 bg-white/50 rounded-lg shadow-inner overflow-clip`}
       {...props}
     >
-      <ul className="text-lg h-2/3 *:my-4 place-content-center">
+      <ul className="text-md h-2/3 *:my-4 place-content-center">
         <li>
           {/* Hall Name */}
-          <RiMap2Fill className="inline" /> {ceremonyHallName}
+          <RiMap2Fill className="inline" />{" "}
+          <span className="inline-block">{`${ceremonyHallName}`}</span>
         </li>
         <li>
           {/* Date */}
-          <RiCalendarEventFill className="inline" /> {ceremonyDateString}
+          <RiCalendarEventFill className="inline" />{" "}
+          <span>{`${ceremonyDateString}`}</span>
         </li>
         <li>
           {/* Host Name */}
-          <RiUserHeartFill className="inline" /> {ceremonyHost}
+          <RiUserHeartFill className="inline" />{" "}
+          <span>{`${ceremonyHost}`}</span>
         </li>
       </ul>
       <div className="flex justify-between flex-wrap h-1/3 items-center *:text-center place-items-center">

@@ -1,12 +1,7 @@
 "use client";
 import { Children, HTMLAttributes, ReactNode } from "react";
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import imageSrc from "../public/ring.png";
-import DescBox from "@/components/Desc.Box";
-import TimerBox from "./timer.Box";
-import NamesLabel from "./names.Label";
-import { RiArrowGoBackFill, RiGiftFill, RiMapPinFill } from "@remixicon/react";
+import { useEffect, useState } from "react";
+import { RiMapPinFill } from "@remixicon/react";
 
 type SwapCardProps = {
   children?: ReactNode;
@@ -24,7 +19,7 @@ const SwapCard = ({ children }: SwapCardProps) => {
     <div
       className={`${
         rolling ? "animate-roll" : ""
-      } transition-all flex flex-col justify-between min-w-10/12 min-h-9/12 rounded-xl  shadow-xl bg-custom-img`}
+      } transition-all flex flex-col justify-between w-10/12 min-h-9/12 rounded-xl  shadow-xl bg-custom-img`}
       onAnimationEnd={() => setRolling(false)}
     >
       {childrenArray[0]}
@@ -39,7 +34,7 @@ const SwapCard = ({ children }: SwapCardProps) => {
       <div
         className={` ${
           !flag ? "" : "hidden"
-        } transition-all w-full h-full flex justify-center items-end *:w-full *:h-1/2 `}
+        } transition-all w-full h-full flex justify-center items-end *:h-1/2 `}
       >
         {childrenArray[2]}
       </div>
